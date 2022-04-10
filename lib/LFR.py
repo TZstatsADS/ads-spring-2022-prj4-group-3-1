@@ -17,6 +17,7 @@ import scipy.optimize as optim
 import copy
 import random
 import pickle
+import sys
 
 # this function returns the distance matrix
 def distances(X, v, alpha, N, P, k):

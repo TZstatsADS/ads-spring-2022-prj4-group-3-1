@@ -17,6 +17,9 @@ import scipy.optimize as optim
 import copy
 import random
 import pickle
+import sys
+from LFR import *
+from LFR import distances
 
 # this function defines the threshold for y_n_hat to be 0 or 1
 def predic_category(y):
