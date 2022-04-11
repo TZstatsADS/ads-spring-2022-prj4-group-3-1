@@ -7,14 +7,14 @@ Term: Spring 2022
 + Team 3
 + Projec title: Learning fair representations (LFR) VS Fairness-aware Classifier with Prejudice Remover Regularizer (PR)
 + Team members
-	+ team member 1: Aakanksha Agarwal (aa4863@columbia.edu)
-	+ team member 2: Lichun He (lh3094@columbia.edu)
-	+ team member 3: Shiqi Tang (st3349@columbia.edu)
-	+ team member 4: Vasiliki Vlachou (vv2340@columbia.edu)
-	+ team member 5: Huiying Wang (hw2816@columbia.edu)
-+ Project summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	+ team member 1: Agarwal, Aakanksha (aa4863@columbia.edu)
+	+ team member 2: He, Lichun (lh3094@columbia.edu)
+	+ team member 3: Tang, Shiqi (st3349@columbia.edu)
+	+ team member 4: Vlachou, Vasiliki (vv2340@columbia.edu)
+	+ team member 5: Wang, Huiying (hw2816@columbia.edu)
++ Project summary: Fairness has been a recent topic in machine learning. The aim of a fairness algorithm is to avoid the outcome decisions are being made unfairly to certain groups or individuals. We as a group, are trying to implement, evaluate, and compare LFR and PR algorithms for Machine Learning Fairness. 
 	
-**Contribution statement**: [default] All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
+**Contribution statement**: Aakanksha and Vasiliki work together on LFR, while Lichun, Shiqi, and Huiying work together on PR. The assigned presenter of this project is Lichun. All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
