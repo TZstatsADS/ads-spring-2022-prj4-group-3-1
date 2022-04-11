@@ -24,7 +24,7 @@ def distances(X, v, alpha, N, P, k):
     dists = np.zeros((N, k))
     for i in range(N):
         for p in range(P):
-            for j in range(k):    
+            for j in range(k):
                 dists[i, j] += (X[i, p] - v[j, p]) * (X[i, p] - v[j, p]) * alpha[p]
     return dists
 
@@ -43,7 +43,7 @@ def M_nk(dists, N, k):
             else:
                 M_nk[i, j] = exp[i, j] / 1e-6
     return M_nk
- 
+
 # this function returns the M_k array
 def M_k(M_nk, N, k):
     M_k = np.zeros(k)
@@ -78,26 +78,26 @@ def yhat(M_nk, y, w, N, k):
 
 
 # this function returns the objective function we want to minimize
-def LFR_objective(params, data_sensitive, data_nonsensitive, y_sensitive, 
+def LFR_objective(params, data_sensitive, data_nonsensitive, y_sensitive,
         y_nonsensitive,  k=10, A_x = 1e-4, A_y = 0.1, A_z = 1000):
-    LFR_objective.iters += 1 
+    LFR_objective.iters += 1
     Ns, P = data_sensitive.shape
     Nns, _ = data_nonsensitive.shape
-    
+
     alpha0 = params[:P]
     alpha1 = params[P : 2 * P]
     w = params[2 * P : (2 * P) + k]
     v = np.matrix(params[(2 * P) + k:]).reshape((k, P))
-        
+
     dists_sensitive = distances(data_sensitive, v, alpha0, Ns, P, k)
     dists_nonsensitive = distances(data_nonsensitive, v, alpha1, Nns, P, k)
 
     M_nk_sensitive = M_nk(dists_sensitive, Ns, k)
     M_nk_nonsensitive = M_nk(dists_nonsensitive, Nns, k)
-    
+
     M_k_sensitive = M_k(M_nk_sensitive, Ns, k)
     M_k_nonsensitive = M_k(M_nk_nonsensitive, Nns, k)
-    
+
     L_z = 0.0
     for j in range(k):
         L_z += abs(M_k_sensitive[j] - M_k_nonsensitive[j])
@@ -117,19 +117,18 @@ def LFR_objective(params, data_sensitive, data_nonsensitive, y_sensitive,
 LFR_objective.iters = 0
 
 def LFR(X_train_s, X_train_n, y_train_s, y_train_n, K=10, A_x = 1e-4, A_y = 0.1, A_z = 1000, iter = 100):
-    rez = np.random.uniform(size=data.shape[1] * 2 + K + data.shape[1] * K)
+    rez = np.random.uniform(size=X_train_s.shape[1] * 2 + K + X_train_s.shape[1] * K)
     bnd = []
     for i, k2 in enumerate(rez):
-        if i < data.shape[1] * 2 or i >= data.shape[1] * 2 + K:
+        if i < X_train_s.shape[1] * 2 or i >= X_train_s.shape[1] * 2 + K:
             bnd.append((None, None))
         else:
             bnd.append((0, 1))
-    
-    # minimize the metric by parameters alpha, w and v
-    para, min_L, d = optim.fmin_l_bfgs_b(LFR_objective, x0=rez, epsilon=1e-5, 
-                                         args=(X_train_s, X_train_n, y_train_s, y_train_n, K, A_z, A_x, A_y), 
-                                         bounds = bnd, approx_grad=True, 
-                                         maxfun=iter, maxiter=iter)
-    
-    return para
 
+    # minimize the metric by parameters alpha, w and v
+    para, min_L, d = optim.fmin_l_bfgs_b(LFR_objective, x0=rez, epsilon=1e-5,
+                                         args=(X_train_s, X_train_n, y_train_s, y_train_n, K, A_z, A_x, A_y),
+                                         bounds = bnd, approx_grad=True,
+                                         maxfun=iter, maxiter=iter)
+
+    return para
