@@ -3,7 +3,6 @@
 
 # In[ ]:
 
-
 import numpy as np
 import pandas as pd
 import cv2 as cv2
@@ -20,6 +19,7 @@ import pickle
 from IPython.display import Markdown, display
 import seaborn as sns
 import matplotlib.patches as patches
+from tabulate import tabulate
 import sys
 from LFR import *
 from LFR import distances
@@ -247,3 +247,24 @@ def plot_fair_metrics(fair_metrics):
         plt.title(cols[i])
         ax.set_ylabel('')
         ax.set_xlabel('')
+
+def compare_models(pred_1_test_s, pred_1_test_n, pred_2_test_s, pred_2_test_n, y_test_s, y_test_n,
+                  fair_metrics_1, fair_metrics_2, model1, model2):
+    acc_1_sen, acc_1_nsen, total_accuracy_1 = calc_accuracy(pred_1_test_s, pred_1_test_n, y_test_s, y_test_n)
+    acc_2_sen, acc_2_nsen, total_accuracy_2 = calc_accuracy(pred_2_test_s, pred_2_test_n, y_test_s, y_test_n)
+
+    calibration_1 = fair_metrics_1.iloc[1]['calibration']
+    equal_opp_diff_1 = fair_metrics_1.iloc[1]['equal_opportunity_difference']
+    avg_abs_odds_diff_1 = fair_metrics_1.iloc[1]['average_abs_odds_difference']
+    disparate_impact_1 = fair_metrics_1.iloc[1]['disparate_impact']
+
+    calibration_2 = fair_metrics_2.iloc[1]['calibration']
+    equal_opp_diff_2 = fair_metrics_2.iloc[1]['equal_opportunity_difference']
+    avg_abs_odds_diff_2 = fair_metrics_2.iloc[1]['average_abs_odds_difference']
+    disparate_impact_2 = fair_metrics_2.iloc[1]['disparate_impact']
+
+    print(tabulate([['accuracy', total_accuracy_1, total_accuracy_2],
+                ['calibration', calibration_1, calibration_2],
+                ['equal_opportunity_difference', equal_opp_diff_1, equal_opp_diff_2],
+                ['average_abs_odds_difference', avg_abs_odds_diff_1, avg_abs_odds_diff_2],
+                ['disparate_impact', disparate_impact_1, disparate_impact_2]], headers=['metric', model1, model2]))
