@@ -229,7 +229,7 @@ def plot_fair_metrics(fair_metrics):
     for attr in fair_metrics.index[1:len(fair_metrics)].values:
         display(Markdown("#### For the %s attribute :"%attr))
         check = [bound[i][0] < fair_metrics.loc[attr][i] < bound[i][1] for i in range(0,4)]
-        display(Markdown("With default thresholds, bias against unprivileged group detected in **%d** out of 4 metrics"%(5 - sum(check))))
+        display(Markdown("With default thresholds, bias against unprivileged group detected in **%d** out of 4 metrics"%(4 - sum(check))))
 
     for i in range(0,4):
         plt.subplot(1, 4, i+1)
